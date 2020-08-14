@@ -1,0 +1,154 @@
+.popup {
+    height: 100vh;
+    width: 100%;
+    background-color: rgba($color-black, .8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    // from
+    @supports (-webkit-backdrop-filter: blur(10px)) or  (backdrop-filter: blur(10px)){
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        background-color: rgba($color-black, .3);
+    }
+    // to
+
+    
+    // &__button {
+    //     margin-left: auto;
+    // }
+
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__close {
+        &:link, &:visited {
+            color:#777;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2s;
+            line-height: 1;
+
+            @include respond(tab-land) {
+                background-color: $color-white;
+                padding: 1rem;
+                top: 0;
+                right: 0;
+            }
+        }
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+    &__content {
+        width: 75%;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        border-radius: 3px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.25);
+        display: table;
+        overflow: hidden;
+        opacity: 0;
+        transition: all .5s .2s;
+
+        @include respond(tab-land) {
+            width: 80%;
+            display: block;
+        }
+
+        @include respond(tab-port) {
+            width: 85%;
+            display: block;
+        }
+    }
+
+    &__right {
+        width: 66.6667%;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3rem 5rem;
+
+        @include respond(tab-land) {
+            width: 100%;
+            display: block;
+        }
+
+        @include respond(tab-port) {
+            padding: 1rem 3rem;
+        }
+    }
+
+    &__left {
+        width: 33.333%;
+        display: table-cell;
+
+        @include respond(tab-land) {
+            width: 100%;
+            display: block;
+        }
+    }
+
+    &__image {
+        display: block;
+        width: 100%;
+
+        &--1 {
+            @include respond(tab-land) {
+                width: 50%;
+                float: left;
+                clip-path: polygon(0% 0%, 100% 0%, 100% 95%, 50% 100%, 0% 95%);
+            }
+        }
+
+        &--2 {
+            @include respond(tab-land) {
+                width: 50%;
+                float: left;
+                clip-path: polygon(0% 0%, 100% 0%, 100% 92.15%, 50% 97.15%, 0% 92.15%);
+            }
+        }
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: 1px solid rgb(216, 215, 215);
+
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+        hyphens: auto;
+
+        @include respond(tab-port) {
+            column-gap: 2rem;
+        }
+
+        @include respond(phone) {
+            font-size: 10px;
+            column-count: 1;
+            margin-bottom: 1rem;
+        }
+    }
+}
